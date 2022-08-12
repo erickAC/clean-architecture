@@ -1,6 +1,5 @@
 package br.com.clean.modules.client.contract;
 
-import java.util.List;
 import java.util.UUID;
 
 public interface ServiceInterface {
