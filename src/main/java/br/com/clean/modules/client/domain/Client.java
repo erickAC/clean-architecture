@@ -1,12 +1,12 @@
 package br.com.clean.modules.client.domain;
 
-import java.util.UUID;
-
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+
+import br.com.clean.modules.client.dto.ClientDTO;
 
 @Entity
 @Table(name = "client")
@@ -14,23 +14,24 @@ public class Client {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	private UUID id;
+	private Integer id;
 	private String nome;
 	private String email;
 	private String endereco;
 
-	Client() {
+	public ClientDTO toDto() {
+		ClientDTO dto = new ClientDTO();
+		dto.setEmail(this.getEmail());
+		dto.setEndereco(this.getEndereco());
+		dto.setNome(this.getNome());
+		return dto;
 	}
-
-	Client(String nome, String email, String endereco) {
-		this.id = UUID.randomUUID();
-	}
-
-	public UUID getId() {
+	
+	public Integer getId() {
 		return id;
 	}
 
-	public void setId(UUID id) {
+	public void setId(Integer id) {
 		this.id = id;
 	}
 

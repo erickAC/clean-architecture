@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.util.UriComponentsBuilder;
 
 import br.com.clean.modules.client.domain.Client;
+import br.com.clean.modules.client.dto.ClientDTO;
 import br.com.clean.modules.client.service.ClientService;
 
 @RestController
@@ -36,9 +37,9 @@ public class ClientController {
 	}
 
 	@PostMapping
-	public ResponseEntity<?> create(@RequestBody Client client) {
-		Client newClient = service.create(client);
-		URI uri = UriComponentsBuilder.newInstance().build("/{id}", client.getId());
+	public ResponseEntity<?> create(@RequestBody ClientDTO dto) {
+		Client newClient = service.create(dto.toObj());
+		URI uri = UriComponentsBuilder.newInstance().build("/{id}", dto.toObj().getId());
 		return ResponseEntity.created(uri).body(newClient);
 	}
 
@@ -52,3 +53,4 @@ public class ClientController {
 		return ResponseEntity.ok().body("Deletado com sucesso");
 	}
 }
+	
